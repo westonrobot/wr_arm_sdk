@@ -1,1 +1,1 @@
-# rm_arm_sdk
+# RM Manipulator SDK

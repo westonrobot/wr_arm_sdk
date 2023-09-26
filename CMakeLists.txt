@@ -6,7 +6,7 @@ if(CCACHE_PROGRAM)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
 endif()
 
-project(rm_arm_sdk VERSION 0.4.2)
+project(rm_arm_sdk VERSION 4.2.2)
 
 ## Project Options
 option(BUILD_TESTING "Build tests for the package" OFF)
@@ -28,7 +28,7 @@ list(APPEND CMAKE_PREFIX_PATH "/opt/weston_robot/lib/cmake")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-## Chosse build type
+## Choose build type
 # set(CMAKE_BUILD_TYPE Release)
 # set(CMAKE_BUILD_TYPE Debug)
 set(default_build_type "Debug")
@@ -66,8 +66,10 @@ find_package(Threads REQUIRED)
 ## Add library binaries
 if(CMAKE_BUILD_TYPE MATCHES Release)
     set(LIB_RELEASE_TYPE "release")
+    set(LIB_RELEASE_NAME "libRM_Service.so")
 else()
     set(LIB_RELEASE_TYPE "debug")
+    set(LIB_RELEASE_NAME "libRM_Serviced.so")
 endif()
 
 
@@ -79,7 +81,7 @@ else()
     message(FATAL_ERROR "Unsupported architecture: ${CMAKE_SYSTEM_PROCESSOR}")
 endif()
 
-set(LIB_FULL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/${LIB_RELEASE_TYPE}/${LIB_ARCH_TYPE}/libRM_Serviced.so)
+set(LIB_FULL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/${LIB_RELEASE_TYPE}/${LIB_ARCH_TYPE}/${LIB_RELEASE_NAME})
 message(STATUS "Library path: ${LIB_FULL_PATH}")
 
 add_library(rm_arm_sdk SHARED IMPORTED GLOBAL)
